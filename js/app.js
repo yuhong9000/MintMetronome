@@ -104,7 +104,7 @@ $('#play').on({
         audio.pause();
         audio.currentTime = 0;
         audio.play();
-      },60000/bpm - interval);
+      },60000/bpm);
       $(this).attr('src','img/if_91-Pause_2123935.png');
     }
     else{
