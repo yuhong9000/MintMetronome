@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Mint Metronome</title>
+		<link rel="icon" href="img/if_91-Play_2123935.png">
+		<link rel="stylesheet" href="css/base.css">
+	</head>
+	<body>
+		<header class="container">
+			<h1>Mint Metronome</h1>
+		</header>
+		<main class="container col row">
+			<div class="container panel row">
+				<img class="icon" src="img/if_25-Communication_2123871.png" alt="beat">
+				<img class="icon" src="img/if_25-Communication_2123871.png" alt="beat">
+				<img class="icon" src="img/if_25-Communication_2123871.png" alt="beat">
+				<img class="icon" src="img/if_25-Communication_2123871.png" alt="beat">
+			</div>
+			<div class="container panel row">
+				<img src="img/if_5-Arrow_Left_2123947.png" id="minus" alt="minus">
+				<input type="number" id="bpm" name="bpm" value="60">
+				<img src="img/if_4-Arrow_Right_2123923.png" id="plus" alt="plus">
+			</div>
+			<div class="container panel row">
+				<select id="tempo" name="user_tempo">
+					<option value="3">3/4</option>
+					<option value="4" selected="selected">4/4</option>
+				</select>
+				<select id="time_signature" name="user_time_signature">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+				<img class="icon" id="play" src="img/if_91-Play_2123935.png" alt="play">
+			</div>
+			<div class="container panel row">
+				<!-- <img class="icon" src="img/if_91-Play_2123935.png" alt="play"> -->
+			</div>
+		</main>
+		<footer class="container">
+				&copy; 2018 Yuhong Hu
+		</footer>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
