@@ -4,6 +4,7 @@ var $minus = $('#minus');
 var $play = $('#play');
 var timeout,playout;
 var bpm = $('#bpm').val();
+var time_sigature = $('#time_signature').val();
 
 var playing = -1; // play status: 1 is playing, -1 is not playing
 
@@ -89,6 +90,12 @@ $('#bpm').on({
   }
 });
 
+$('#time_signature').on({
+  change: function(event){
+    time_sigature = event.target.value;
+  }
+});
+
 // play button event
 $('#play').on({
   click: function(){
@@ -104,7 +111,7 @@ $('#play').on({
         audio.pause();
         audio.currentTime = 0;
         audio.play();
-      },60000/bpm);
+      },60000/(bpm*time_sigature));
       $(this).attr('src','img/if_91-Pause_2123935.png');
     }
     else{
