@@ -8,9 +8,10 @@ var bpm = $('#bpm').val();
 var playing = -1; // play status: 1 is playing, -1 is not playing
 
 // audio element
-var $audioElement1 = document.createElement('audio');
-$audioElement1.setAttribute('src', 'sound/Wood_Block_Tick.wav');
-$audioElement1.setAttribute('autoplay', 'autoplay');
+var $audioElement1 = $('audio');
+// var $audioElement1 = document.createElement('audio');
+// $audioElement1.setAttribute('src', 'sound/Wood_Block_Tick.wav');
+// $audioElement1.setAttribute('autoplay', 'autoplay');
 
 // event tempo select option change
 $tempo.on('change',function(event){
@@ -95,10 +96,14 @@ $('#play').on({
     if(playing == 1){
       clearInterval(playout);
       console.log('playing: '+60000/bpm);
-      let interval = $audioElement1.duration*1000;
+
+      let audio = new Audio($audioElement1.attr("src"));
+      let interval = $audioElement1[0].duration*1000;
       console.log('duration: '+ (60000/bpm - interval));
       playout = setInterval(function() {
-        $audioElement1.play();
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
       },60000/bpm - interval);
       $(this).attr('src','img/if_91-Pause_2123935.png');
     }
