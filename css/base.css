@@ -112,13 +112,13 @@ select{
 }
 
 /* media query */
-@media only screen and (max-width: 850px){
+@media only screen and (max-width: 1300px){
 	.panel{
-		width: 425px;
+		width: 650px;
 	}
 }
 
-@media only screen and (max-width: 425px){
+@media only screen and (max-width: 650px){
 	.panel{
 		width: 100%;
 	}

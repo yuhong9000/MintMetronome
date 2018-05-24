@@ -2,7 +2,7 @@ var $tempo = $('#tempo');
 var $plus = $('#plus');
 var $minus = $('#minus');
 var $play = $('#play');
-var timeout,playout;
+var timeout,playout,iconout;
 var bpm = $('#bpm').val();
 var time_sigature = $('#time_signature').val();
 
@@ -28,7 +28,7 @@ $tempo.on('change',function(event){
 
 function IncrementBPM(num){
   let $display = $('#bpm');
-  $display.val(Math.min(parseInt($display.val())+1,400));
+  $display.val(Math.min(parseInt($display.val())+1,200));
   bpm = $display.val();
   console.log('setting: '+ 60000/bpm);
 }
@@ -98,26 +98,71 @@ $('#time_signature').on({
 
 // play button event
 $('#play').on({
-  click: function(){
-    playing *= -1;
-    if(playing == 1){
-      clearInterval(playout);
-      console.log('playing: '+60000/bpm);
-
-      let audio = new Audio($audioElement1.attr("src"));
-      let interval = $audioElement1[0].duration*1000;
-      console.log('duration: '+ (60000/bpm - interval));
-      playout = setInterval(function() {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.play();
-      },60000/(bpm*time_sigature));
-      $(this).attr('src','img/if_91-Pause_2123935.png');
-    }
-    else{
-      clearInterval(playout);
-      $(this).attr('src','img/if_91-Play_2123935.png');
-    }
-
+  click: function(event){
+    setTimeout(()=>{playBeat(event);},0);
+    setTimeout(()=>{playBeatIcon(event);},0);
+    // console.log("hello there");
   }
 });
+
+function playBeat(event){
+  playing *= -1;
+  if(playing == 1){
+    clearInterval(playout);
+    console.log('playing: '+60000/bpm);
+
+    let audio = new Audio($audioElement1.attr("src"));
+    // let interval = $audioElement1[0].duration*1000;
+    // console.log('duration: '+ (60000/bpm - interval));
+    audio.load();
+    audio.play();
+    playout = setInterval(function() {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play();
+    },60000/(bpm*time_sigature));
+    playBeatIcon();
+    $(event.target).attr('src','img/if_91-Pause_2123935.png');
+  }
+  else{
+    clearInterval(playout);
+    playBeatIcon();
+    $(event.target).attr('src','img/if_91-Play_2123935.png');
+  }
+}
+
+function playBeatIcon(){
+  let $beatIcons = $('img[alt="beat"]');
+  // $beatIcons[0].style.filter = "invert(100%)";
+  // console.log($beatIcons[0]);
+  let index = 0;
+  let start = 1;
+  let flag = 1;
+
+  clearInterval(iconout);
+  for(let i = 0; i < $tempo.val();i++){
+    $beatIcons[i].style.filter = "invert(0%)";
+  }
+
+  let play = function(){
+    flag *= -1;
+    if(flag == 1){
+      $beatIcons[index].style.filter = "invert(0%)";
+    }else{
+      $beatIcons[index].style.filter = "invert(65%)";
+    }
+  };
+
+  if(playing == 1){
+    play();
+    iconout = setInterval(function() {
+      play();
+      start++;
+      if(start == time_sigature * 2){
+        start = 0;
+        index = (index==$tempo.val()-1)? 0:index+1;
+      }
+    },30000/(bpm*time_sigature));
+  }
+
+}
