@@ -40,7 +40,10 @@ footer {
 
 .row{
 	flex: 1;
-	flex-basis: 100px;
+}
+
+footer {
+	max-height: 30px;
 }
 
 .panel {
@@ -48,6 +51,7 @@ footer {
 	border-bottom: 0px;
 	background-color: #9cffc4;
 	width:50%;
+	min-height: 100px;
 	margin: 0;
 	text-align: center;
 	align-items: center;
